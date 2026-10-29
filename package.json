@@ -1,0 +1,8 @@
+{
+  "name": "zoom-bot-scheduler",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

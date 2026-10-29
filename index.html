@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Schedule a cloud bot to join a Zoom meeting." />
+    <title>Zoom Bot Scheduler</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="pulse"></span> Cloud scheduler</div>
+        <h1 id="page-title">Send a bot to Zoom</h1>
+        <p class="intro">Schedule it once, then close the page. Your phone and computer can be off when the meeting begins.</p>
+
+        <form id="schedule-form">
+          <label for="zoom-url">Zoom link</label>
+          <input id="zoom-url" name="zoomUrl" type="url" inputmode="url" placeholder="https://zoom.us/j/…" required />
+
+          <label for="schedule-type">Schedule</label>
+          <select id="schedule-type" name="scheduleType">
+            <option value="once">One time</option>
+            <option value="repeat">Repeating weekly</option>
+          </select>
+
+          <div id="once-fields">
+            <div>
+              <label for="join-at">Join date and time</label>
+              <input id="join-at" name="joinAt" type="datetime-local" required />
+            </div>
+          </div>
+
+          <div id="repeat-fields" class="repeat-fields" hidden>
+            <div class="row">
+              <div>
+                <label for="start-date">Start date</label>
+                <input id="start-date" type="date" />
+              </div>
+              <div>
+                <label for="end-date">End date</label>
+                <input id="end-date" type="date" />
+              </div>
+            </div>
+
+            <fieldset>
+              <legend>Repeat on</legend>
+              <div class="weekdays">
+                <label><input type="checkbox" name="weekday" value="1" /> Mon</label>
+                <label><input type="checkbox" name="weekday" value="2" /> Tue</label>
+                <label><input type="checkbox" name="weekday" value="3" /> Wed</label>
+                <label><input type="checkbox" name="weekday" value="4" /> Thu</label>
+                <label><input type="checkbox" name="weekday" value="5" /> Fri</label>
+                <label><input type="checkbox" name="weekday" value="6" /> Sat</label>
+                <label><input type="checkbox" name="weekday" value="0" /> Sun</label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Times each selected day</legend>
+              <div id="time-list" class="time-list">
+                <div class="time-row"><input type="time" name="repeatTime" /></div>
+              </div>
+              <button id="add-time" class="secondary" type="button">+ Add another time</button>
+            </fieldset>
+          </div>
+
+          <label for="bot-name">Name shown in Zoom</label>
+          <input id="bot-name" name="botName" type="text" value="Walid's assistant" maxlength="100" required />
+
+          <button type="submit">Schedule bot <span aria-hidden="true">→</span></button>
+          <p class="note">Schedule at least 10 minutes ahead. Repeating schedules create up to 30 separate bots. The bot is visible, does not record, and may need host admission.</p>
+        </form>
+
+        <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+      </section>
+    </main>
+  </body>
+</html>
